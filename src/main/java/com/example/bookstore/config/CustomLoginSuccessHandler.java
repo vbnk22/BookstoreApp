@@ -18,7 +18,7 @@ public class CustomLoginSuccessHandler implements org.springframework.security.w
         if (roles.contains("ADMIN")) {
             response.sendRedirect("/admin");
         } else {
-            response.sendRedirect("/home");
+            response.sendRedirect("/main");
         }
     }
 }
