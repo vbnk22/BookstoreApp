@@ -1,2 +1,13 @@
-package com.example.bookstore.controller;public class AdminController {
+package com.example.bookstore.controller;
+
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
+
+@Controller
+public class AdminController {
+
+    @GetMapping("/admin")
+    public String adminPanel() {
+        return "adminpanel";
+    }
 }
