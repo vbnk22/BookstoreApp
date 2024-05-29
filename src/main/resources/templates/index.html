@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
 </head>
 <body>
@@ -10,6 +10,7 @@
         <div th:text="${book.author}"></div>
         <div th:text="${'Price: ' + book.price + ' zl'}"></div>
         <div th:text="${'Quantity: ' + book.quantity}"></div>
+        <a th:href="@{/book/update/{id}(id=${book.id})}">Edit</a>
     </div>
 </div>
 </body>
