@@ -33,6 +33,7 @@ public class BookDAO implements IBookDAO {
         Query query = em.createQuery(GET_BOOK_FROM_ID_SQL);
         query.setParameter("id", id);
         List<Book> books = query.getResultList();
+        // jesli cos nie dziala to to zmienic
         if (books.isEmpty()) {
             return Optional.empty();
         }
@@ -42,6 +43,11 @@ public class BookDAO implements IBookDAO {
     @Override
     public void saveOrUpdate(Book book) {
         em.persist(book);
+        if ( findById(book.getId()).isEmpty() ) {
+            em.persist(book);
+        } else {
+            em.merge(book);
+        }
     }
 
     @Override
