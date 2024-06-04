@@ -24,7 +24,8 @@ public class SecurityConfig {
                         .loginPage("/login")
                         .successHandler(new CustomLoginSuccessHandler())
                         .permitAll())
-                .logout(logout -> logout.permitAll());
+                .logout(logout -> logout.permitAll()
+                        .logoutSuccessUrl("/"));
         return http.build();
     }
 

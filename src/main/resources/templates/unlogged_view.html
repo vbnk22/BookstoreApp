@@ -3,6 +3,7 @@
 <head>
 </head>
 <body>
+<div th:if="${logoutMessage}" th:text="${logoutMessage}"> </div>
 <div>
     <div th:each="book : ${books}">
         <div th:text="${book.id}"></div>
@@ -13,5 +14,7 @@
         <a th:href="@{/cart/add/{bookId}/1(bookId=${book.id})}">Add to cart</a>
     </div>
 </div>
+<button onclick="window.location.href='/login'">Login</button>
+<button onclick="window.location.href='/register'">Register</button>
 </body>
 </html>

@@ -6,6 +6,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
 public class HomeController {
@@ -21,8 +22,11 @@ public class HomeController {
     }*/
 
     @RequestMapping(path = {"/main", "/"}, method = RequestMethod.GET)
-    public String main(Model model) {
+    public String main(Model model, @RequestParam(value = "logout", required = false) String logout) {
         model.addAttribute("books", this.bookService.getAllBooks());
+        if (logout != null) {
+            model.addAttribute("logoutMessage", "Logout successfully!");
+        }
         return "unlogged_view";
     }
 
