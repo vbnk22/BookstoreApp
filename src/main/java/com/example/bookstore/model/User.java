@@ -27,6 +27,11 @@ public class User {
     )
     private Set<Role> roles = new HashSet<>();
 
+    @OneToOne(cascade = CascadeType.ALL, orphanRemoval = true)
+    @JoinColumn(name = "cart_id")
+    private Cart cart;
+
+
     public Long getId() {
         return id;
     }
@@ -43,6 +48,10 @@ public class User {
         return username;
     }
 
+    public Cart getCart() {
+        return cart;
+    }
+
     public void setId(Long id) {
         this.id = id;
     }
@@ -57,5 +66,9 @@ public class User {
 
     public void setUsername(String username) {
         this.username = username;
+    }
+
+    public void setCart(Cart cart) {
+        this.cart = cart;
     }
 }

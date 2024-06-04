@@ -50,6 +50,9 @@ public class BookDAO implements IBookDAO {
 
     @Override
     public void delete(int id) {
-        em.remove(em.getReference(Book.class, id));
+        Book book = findById(id).orElse(null);
+        if (book != null) {
+            em.remove(book);
+        }
     }
 }

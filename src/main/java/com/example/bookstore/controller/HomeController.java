@@ -4,10 +4,8 @@ import com.example.bookstore.service.BookService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
 public class HomeController {
@@ -22,9 +20,15 @@ public class HomeController {
         return "home";
     }*/
 
-    @RequestMapping(path = {"/main", "/", "/index"}, method = RequestMethod.GET)
+    @RequestMapping(path = {"/main", "/"}, method = RequestMethod.GET)
     public String main(Model model) {
         model.addAttribute("books", this.bookService.getAllBooks());
-        return "index";
+        return "unlogged_view";
+    }
+
+    @RequestMapping(path = "/main_view")
+    public String mainView(Model model) {
+        model.addAttribute("books", this.bookService.getAllBooks());
+        return "main_view";
     }
 }

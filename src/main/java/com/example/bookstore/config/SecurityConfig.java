@@ -15,8 +15,7 @@ public class SecurityConfig {
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http
-                .authorizeRequests(auth -> auth.requestMatchers("/login", "/logout", "/register").permitAll()
-                        .requestMatchers("/h2-console/**").permitAll()
+                .authorizeRequests(auth -> auth.requestMatchers("/login", "/logout", "/register", "/main", "/").permitAll()
                         .requestMatchers("/admin/**").hasAuthority("ADMIN")
                                     .anyRequest().authenticated())
                 .csrf(csrf -> csrf.disable())
