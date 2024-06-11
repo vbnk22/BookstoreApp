@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div>
+    <div th:each="order : ${orders}">
+        <div th:text="${order.id}"></div>
+        <div th:text="${order.status}"></div>
+        <div th:text="${order.date}"></div>
+        <div th:each="item : ${order.items}">
+            <div th:text="${item.book.title}"></div>
+            <div th:text="${item.book.author}"></div>
+            <div th:text="${item.quantity}"></div>
+        </div>
+    </div>
+</div>
+</body>
+</html>
