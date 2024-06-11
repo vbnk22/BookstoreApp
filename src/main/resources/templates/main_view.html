@@ -5,9 +5,9 @@
 <body>
 <div>
     <div th:each="book : ${books}">
-        <div th:text="${book.id}"></div>
-        <div th:text="${book.title}"></div>
-        <div th:text="${book.author}"></div>
+        <div th:text="'ID: ' + ${book.id}"></div>
+        <div th:text="'Title: ' + ${book.title}"></div>
+        <div th:text="'Author: ' + ${book.author}"></div>
         <div th:text="${'Price: ' + book.price + ' zl'}"></div>
         <div th:text="${'Quantity: ' + book.quantity}"></div>
         <a th:if="${book.quantity > 0}" th:href="@{/cart/add/{bookId}/1(bookId=${book.id})}">Add to cart</a>
@@ -16,6 +16,9 @@
         <div>
             <button type="submit">Logout</button>
         </div>
+    </form>
+    <form th:action="@{/order/all}" method="get">
+        <button type="submit">Orders</button>
     </form>
 </div>
 </body>

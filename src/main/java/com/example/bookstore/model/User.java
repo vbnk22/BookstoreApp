@@ -46,5 +46,7 @@ public class User {
     private Cart cart;
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
+    @Getter
+    @Setter
     private List<Order> orders = new ArrayList<>();
 }

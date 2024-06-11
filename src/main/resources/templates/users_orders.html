@@ -7,15 +7,14 @@
 <body>
 <div>
     <div th:each="order : ${orders}">
-        <div th:text="${order.id}"></div>
-        <div th:text="${order.status}"></div>
-        <div th:text="${order.date}"></div>
+        <div th:text="'ID: ' + ${order.id}"></div>
+        <div th:text="'Status: ' + ${order.status}"></div>
+        <div th:text="'Date: ' + ${order.date}"></div>
         <div th:each="item : ${order.items}">
-            <div th:text="${item.book.title}"></div>
-            <div th:text="${item.book.author}"></div>
+            <div th:text="'Title: ' + ${item.book.title}"></div>
+            <div th:text="'Author: ' + ${item.book.author}"></div>
             <div th:text="'Quantity: ' + ${item.quantity}"></div>
         </div>
-        <a th:href="@{/order/update/{id}(id=${order.id})}">Edit</a>
     </div>
 </div>
 </body>

@@ -9,6 +9,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @Controller
 @RequestMapping("/order")
 public class OrderController {
@@ -46,5 +48,12 @@ public class OrderController {
             orderService.saveOrder(order);
         }
         return "redirect:/admin/order/all";
+    }
+
+    @GetMapping("/all")
+    public String usersOrders(Model model) {
+        List<Order> orders = orderService.getOrdersByUserId();
+        model.addAttribute("orders", orders);
+        return "users_orders";
     }
 }

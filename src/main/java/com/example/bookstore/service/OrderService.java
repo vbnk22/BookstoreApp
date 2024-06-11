@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -54,5 +55,14 @@ public class OrderService {
     @Transactional
     public List<Order> getAllOrders() {
         return orderRepository.findAll();
+    }
+
+    @Transactional
+    public List<Order> getOrdersByUserId() {
+        User user = userService.getCurrentUser();
+        if (user == null) {
+            return new ArrayList<>();
+        }
+        return user.getOrders();
     }
 }
