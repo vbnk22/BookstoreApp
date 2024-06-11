@@ -1,6 +1,7 @@
 package com.example.bookstore.controller;
 
 import com.example.bookstore.model.Order;
+import com.example.bookstore.model.OrderStatus;
 import com.example.bookstore.service.OrderService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -27,10 +28,23 @@ public class OrderController {
         return "order";
     }
 
-    @RequestMapping(path = "/all", method = RequestMethod.GET)
-    public String getAllOrders(Model model) {
-        model.addAttribute("orders", orderService.getAllOrders());
-        return "orders";
+    @RequestMapping(path = "/update/{orderId}", method = RequestMethod.GET)
+    public String updateOrder(@PathVariable long orderId, Model model) {
+        Order order = orderService.getOrder(orderId);
+        if (order == null) {
+            return "redirect:admin/order/all";
+        }
+        model.addAttribute("order", order);
+        return "order_form";
+    }
+
+    @PostMapping("/update/{orderId}")
+    public String updateOrder(@PathVariable long orderId, @RequestParam String status) {
+        Order order = orderService.getOrder(orderId);
+        if (order != null) {
+            order.setStatus(OrderStatus.valueOf(status));
+            orderService.saveOrder(order);
+        }
+        return "redirect:/admin/order/all";
     }
 }
-

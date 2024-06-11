@@ -15,6 +15,7 @@
             <div th:text="${item.book.author}"></div>
             <div th:text="${item.quantity}"></div>
         </div>
+        <a th:href="@{/order/update/{id}(id=${order.id})}">Edit</a>
     </div>
 </div>
 </body>

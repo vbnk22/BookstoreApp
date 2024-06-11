@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="pl">
+<body>
+<div th:text="${order.id}"></div>
+<div th:text="${order.status}"></div>
+<div th:text="${order.date}"></div>
+<div th:each="item : ${order.items}">
+    <div th:text="${item.book.title}"></div>
+    <div th:text="${item.book.author}"></div>
+    <div th:text="${item.quantity}"></div>
+</div>
+<form method="post" th:action="@{/order/update/{id}(id=${order.id})}">
+    <select name="status">
+        <option value="SUBMITTED" th:selected="${order.status == 'SUBMITTED'}">SUBMITTED</option>
+        <option value="PAID" th:selected="${order.status == 'PAID'}">PAID</option>
+        <option value="SHIPPED" th:selected="${order.status == 'SHIPPED'}">SHIPPED</option>
+        <option value="COMPLETED" th:selected="${order.status == 'COMPLETED'}">COMPLETED</option>
+    </select>
+    <button type="submit">Update status</button>
+</form>
+</body>
+</html>
