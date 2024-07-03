@@ -30,6 +30,9 @@ public class CartService {
     public Cart addToCart(int bookId, int quantity) {
         Cart cart = getCart();
         Book book = bookRepository.findById(bookId).orElseThrow(() -> new RuntimeException("Book not found"));
+        if (book.getQuantity() < 1) {
+            return cart;
+        }
         cart.addItem(book, quantity);
         book.setQuantity(book.getQuantity() - quantity);
         bookRepository.saveOrUpdate(book);

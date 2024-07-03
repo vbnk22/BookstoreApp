@@ -17,6 +17,8 @@ public class SecurityConfig {
         http
                 .authorizeRequests(auth -> auth.requestMatchers("/login", "/logout", "/register", "/main", "/").permitAll()
                         .requestMatchers("/admin/**").hasAuthority("ADMIN")
+                        .requestMatchers("/book/**").hasAuthority("ADMIN")
+                        .requestMatchers("/order/**").hasAnyAuthority("USER", "ADMIN")
                                     .anyRequest().authenticated())
                 .csrf(csrf -> csrf.disable())
                 .headers(headers -> headers.frameOptions(HeadersConfigurer.FrameOptionsConfig::sameOrigin))

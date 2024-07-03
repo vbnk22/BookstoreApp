@@ -65,4 +65,11 @@ public class OrderService {
         }
         return user.getOrders();
     }
+
+    @Transactional
+    public double getSumOfOrder(Order order) {
+        return order.getItems().stream()
+                .mapToDouble(item -> item.getBook().getPrice().doubleValue() * item.getQuantity())
+                .sum();
+    }
 }

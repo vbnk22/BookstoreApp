@@ -8,10 +8,7 @@ import com.example.bookstore.service.OrderService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -30,19 +27,7 @@ public class AdminController {
         return "adminpanel";
     }
 
-    @RequestMapping(path = "admin/order/all", method = RequestMethod.GET)
-    public String getAllOrders(Model model) {
-        model.addAttribute("orders", orderService.getAllOrders());
-        return "orders";
-    }
 
-    @RequestMapping(path = "admin/order/update/{orderId}", method = RequestMethod.POST)
-    public String updateOrderStatus(@PathVariable("orderId") Long orderId, @PathVariable("status") OrderStatus status, Model model) {
-        Order order = orderService.getOrder(orderId);
-        if (order != null) {
-            order.setStatus(status);
-            orderService.saveOrder(order);
-        }
-        return "redirect:/admin/order/all";
-    }
+
+
 }

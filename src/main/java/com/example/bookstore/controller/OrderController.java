@@ -27,6 +27,9 @@ public class OrderController {
     public String getOrder(@PathVariable long orderId, Model model) {
         Order order = orderService.getOrder(orderId);
         model.addAttribute("order", order);
+
+        model.addAttribute("totalSum", orderService.getSumOfOrder(order));
+
         return "order";
     }
 
@@ -34,13 +37,24 @@ public class OrderController {
     public String updateOrder(@PathVariable long orderId, Model model) {
         Order order = orderService.getOrder(orderId);
         if (order == null) {
-            return "redirect:admin/order/all";
+            return "redirect:/order/all";
         }
         model.addAttribute("order", order);
         return "order_form";
     }
 
-    @PostMapping("/update/{orderId}")
+    @RequestMapping(path = "/update/{orderId}", method = RequestMethod.POST)
+    @PreAuthorize("hasAuthority('ADMIN')")
+    public String updateOrderStatus(@PathVariable("orderId") Long orderId, @RequestParam("status") OrderStatus status, Model model) {
+        Order order = orderService.getOrder(orderId);
+        if (order != null) {
+            order.setStatus(status);
+            orderService.saveOrder(order);
+        }
+        return "redirect:/order/allOrders";
+    }
+
+    /*@PostMapping("/update/{orderId}")
     public String updateOrder(@PathVariable long orderId, @RequestParam String status) {
         Order order = orderService.getOrder(orderId);
         if (order != null) {
@@ -48,12 +62,20 @@ public class OrderController {
             orderService.saveOrder(order);
         }
         return "redirect:/admin/order/all";
-    }
+    }*/
 
     @GetMapping("/all")
+    @PreAuthorize("hasAuthority('USER')")
     public String usersOrders(Model model) {
         List<Order> orders = orderService.getOrdersByUserId();
         model.addAttribute("orders", orders);
         return "users_orders";
+    }
+
+    @RequestMapping(path = "/allOrders", method = RequestMethod.GET)
+    @PreAuthorize("hasAuthority('ADMIN')")
+    public String getAllOrders(Model model) {
+        model.addAttribute("orders", orderService.getAllOrders());
+        return "orders";
     }
 }
