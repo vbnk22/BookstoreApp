@@ -25,7 +25,6 @@ Bookstore is a sample web application built using **Spring Boot**. It provides f
 - PostgreSQL
 - Thymeleaf
 - Maven
-- H2 (for development/testing)
 - Lombok
 
 ---
@@ -50,7 +49,6 @@ Bookstore is a sample web application built using **Spring Boot**. It provides f
 - **Hibernate Validator** (8.0.1.Final)
 - **PostgreSQL JDBC Driver** (42.7.3)
 - **Lombok** (1.18.32)
-- **H2 Database** (for in-memory testing)
 
 ---
 
@@ -73,11 +71,18 @@ git clone https://github.com/vbnk22/BookstoreApp
 2. Configure your PostgreSQL database credentials in application.properties:
 
 ```properties
-spring.datasource.url=jdbc:postgresql://localhost:5432/bookstore
-spring.datasource.username=your_username
-spring.datasource.password=your_password
+spring.application.name=bookstore
+spring.datasource.url=jdbc:postgresql://dumbo.db.elephantsql.com/yzfrvbls
+spring.datasource.username=yzfrvbls
+spring.datasource.password=HUwn4VJEq_IkBtXi4--mFF6nPrtPMx02
+spring.datasource.driver-class-name=org.postgresql.Driver
+spring.datasource.hikari.maximum-pool-size=4
+spring.datasource.hikari.minimum-idle=1
 spring.jpa.hibernate.ddl-auto=update
 ```
+
+> **Note:** This configuration uses a free instance from [ElephantSQL](https://www.elephantsql.com/),  
+> which has been **discontinued**. To run the app now, you should configure your own PostgreSQL database—locally or using a cloud provider.
 
 3. Build and run the application:
 
